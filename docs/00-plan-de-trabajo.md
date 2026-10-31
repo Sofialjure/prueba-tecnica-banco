@@ -37,7 +37,7 @@ Fases del proyecto en el orden en que se desarrollan. Cada fase se divide en PRs
 | 9.2 | Nube: despliegue | `feature/cloud-deploy` | [#27](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/27) | ✅ |
 | 9.3 | Nube: HTTPS con Let's Encrypt | `feature/cloud-https` | [#28](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/28) | ✅ |
 | 10.1 | Trazabilidad requisito → prueba | `feature/requirements-traceability` | [#29](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/29) | ✅ |
-| 10.2 | Versión 1.0.0 hacia `main` | `release/1.0.0` | — | ⏳ |
+| 10.2 | Versión 1.0.0 hacia `main` | `release/1.0.0` | [#30](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/30) | ✅ |
 | 10.3 | Tag `v1.0.0` y regreso de `main` a `develop` | `main` → `develop` | — | ⏳ |
 
 ## Detalle por fase
@@ -126,5 +126,5 @@ Fases del proyecto en el orden en que se desarrollan. Cada fase se divide en PRs
 ### 10. Versión 1.0.0 🔄
 
 - [x] 10.1 Tabla de trazabilidad: cada requisito con su implementación y las pruebas que lo demuestran ([Trazabilidad](07-trazabilidad.md))
-- [ ] 10.2 Rama `release/1.0.0`: versión 1.0.0 en backend y frontend, CHANGELOG y revisión final de la documentación
+- [x] 10.2 Rama `release/1.0.0`: versión 1.0.0 en backend y frontend, [CHANGELOG](../CHANGELOG.md) y revisión final de la documentación
 - [ ] 10.3 Integración a `main` con el tag `v1.0.0` (Release de GitHub) y regreso de `main` a `develop`
