@@ -1,0 +1,104 @@
+// "Modern banking" look: navy side menu with a gold accent, light grey background, white cards.
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$blue-palette,
+        tertiary: mat.$yellow-palette,
+      ),
+      typography: (
+        plain-family: 'Inter, Arial, sans-serif',
+        brand-family: 'Inter, Arial, sans-serif',
+        bold-weight: 700,
+        medium-weight: 600,
+        regular-weight: 400,
+      ),
+      density: 0,
+    )
+  );
+  // Brand colors on top of the generated Material palette
+  @include mat.theme-overrides(
+    (
+      primary: #16305f,
+      on-primary: #ffffff,
+      primary-container: #dce5f7,
+      on-primary-container: #0c1d3f,
+      surface: #ffffff,
+      outline-variant: #e4e8f0,
+    )
+  );
+
+  --app-navy: #0f1f3d;
+  --app-navy-light: #1b3260;
+  --app-gold: #d6a632;
+  --app-background: #f3f5f9;
+  --app-text-muted: #64708a;
+  --app-radius: 16px;
+  --app-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 6px 16px rgba(16, 24, 40, 0.06);
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--app-background);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
+
+// White rounded card with a soft shadow, used by every screen
+.app-card {
+  background: var(--mat-sys-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+// Buttons and fields slightly rounder than Material's default
+.mat-mdc-button-base {
+  --mat-button-filled-container-shape: 10px;
+  --mat-button-outlined-container-shape: 10px;
+  --mat-button-text-container-shape: 10px;
+}
+
+.mat-mdc-form-field {
+  --mat-form-field-outlined-container-shape: 10px;
+}
+
+// Account card menu (rendered in an overlay, outside the card)
+.mat-mdc-menu-item.cancel-item:not([disabled]) {
+  color: var(--mat-sys-error);
+
+  .mat-icon {
+    color: var(--mat-sys-error);
+  }
+}
+
+.mat-mdc-menu-item .hint {
+  display: block;
+  font-size: 12px;
+  color: var(--app-text-muted);
+}
+
+// Notifications: green for success, red for API errors
+.snackbar-success {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: #1e7a3c,
+      supporting-text-color: #ffffff,
+      button-color: #d4f7dc,
+    )
+  );
+}
+
+.snackbar-error {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: #b3261e,
+      supporting-text-color: #ffffff,
+      button-color: #ffdad6,
+    )
+  );
+}

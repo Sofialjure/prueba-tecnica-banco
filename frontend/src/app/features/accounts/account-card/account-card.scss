@@ -1,0 +1,149 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 18px;
+  overflow: hidden;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 31, 61, 0.18);
+  transition: filter 0.2s;
+
+  // Decorative circles, like the print of a physical card
+  &::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: -40px 120px 0 rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+  }
+}
+
+:host(.savings) {
+  background: linear-gradient(135deg, #0f1f3d 0%, #1f3d78 100%);
+}
+
+:host(.checking) {
+  background: linear-gradient(135deg, #0b3d48 0%, #12707a 100%);
+}
+
+:host(.not-active) {
+  filter: grayscale(0.85);
+  opacity: 0.85;
+}
+
+.top {
+  // Same height with or without the menu button, so numbers line up across cards
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.top-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  // Above the decorative circles
+  position: relative;
+  z-index: 1;
+}
+
+.menu-button {
+  margin-right: -10px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.type {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+
+  mat-icon {
+    color: var(--app-gold);
+  }
+}
+
+.number {
+  margin: 4px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+
+.caption {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.balance strong {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+
+  &.negative {
+    color: #ffc9c4;
+  }
+}
+
+.overdraft {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.18);
+  font-size: 13px;
+}
+
+.overdraft-text {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+
+  span:first-child {
+    color: #ffc9c4;
+    font-weight: 600;
+  }
+}
+
+.overdraft-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: #ff8a80;
+  }
+}
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px 24px;
+  font-size: 14px;
+}
+
+.badge {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(214, 166, 50, 0.22);
+  color: #ffe2a0;
+  font-size: 12px;
+  font-weight: 600;
+}

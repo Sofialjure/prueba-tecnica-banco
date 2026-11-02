@@ -1,0 +1,54 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidenav [mode]="sidenavMode()" [opened]="sidenavOpened()" class="sidenav">
+    <div class="brand">
+      <span class="brand-logo"><mat-icon>account_balance</mat-icon></span>
+      <span class="brand-name">
+        Entidad
+        <strong>Financiera</strong>
+      </span>
+    </div>
+
+    <p class="nav-title">Menú</p>
+    <nav class="nav">
+      @for (item of navItems; track item.route) {
+        <a
+          class="nav-item"
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+          (click)="sidenavMode() === 'over' && sidenav.close()"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="sidenav-footer">Prueba técnica · v1.0</div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main">
+    <header class="topbar">
+      @if (sidenavMode() === 'over') {
+        <button mat-icon-button aria-label="Abrir menú" (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+      <div class="greeting">
+        <span class="greeting-title">{{ greeting }}</span>
+        <span class="greeting-date">{{ today | date: "EEEE, d 'de' MMMM 'de' y" }}</span>
+      </div>
+      <div class="user">
+        <span class="user-text">
+          <strong>Operador</strong>
+          <small>Oficina principal</small>
+        </span>
+        <span class="user-avatar">OP</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

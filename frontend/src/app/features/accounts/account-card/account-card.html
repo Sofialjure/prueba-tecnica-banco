@@ -1,0 +1,126 @@
+@let item = account();
+<div class="top">
+  <span class="type">
+    <mat-icon>{{ item.accountType === 'SAVINGS' ? 'savings' : 'account_balance' }}</mat-icon>
+    {{ item.accountType | label: 'accountTypeName' }}
+  </span>
+  <span class="top-right">
+    <app-status-chip [status]="item.status" />
+    @if (actions()) {
+      <button
+        mat-icon-button
+        class="menu-button"
+        [matMenuTriggerFor]="menu"
+        [attr.aria-label]="'Acciones de la cuenta ' + (item.accountNumber | accountNumber)"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    }
+  </span>
+</div>
+
+<mat-menu #menu="matMenu" xPosition="before">
+  <a mat-menu-item [routerLink]="['/accounts', item.id, 'statement']">
+    <mat-icon>receipt_long</mat-icon>
+    Estado de cuenta
+  </a>
+  <mat-divider />
+  @if (item.status === 'ACTIVE') {
+    <a
+      mat-menu-item
+      routerLink="/transactions"
+      [queryParams]="{ type: 'deposit', account: item.accountNumber }"
+    >
+      <mat-icon>south_west</mat-icon>
+      Consignar
+    </a>
+    <a
+      mat-menu-item
+      routerLink="/transactions"
+      [queryParams]="{ type: 'withdrawal', account: item.accountNumber }"
+    >
+      <mat-icon>north_east</mat-icon>
+      Retirar
+    </a>
+    <a
+      mat-menu-item
+      routerLink="/transactions"
+      [queryParams]="{ type: 'transfer', account: item.accountNumber }"
+    >
+      <mat-icon>swap_horiz</mat-icon>
+      Transferir
+    </a>
+    <mat-divider />
+  }
+  @if (item.status === 'ACTIVE') {
+    <button mat-menu-item (click)="statusChange.emit('deactivate')">
+      <mat-icon>pause_circle</mat-icon>
+      Inactivar cuenta
+    </button>
+  } @else if (item.status === 'INACTIVE') {
+    <button mat-menu-item (click)="statusChange.emit('activate')">
+      <mat-icon>play_circle</mat-icon>
+      Activar cuenta
+    </button>
+  }
+  <!-- A cancelled account is final (SUP-04): only its statement remains -->
+  @if (item.status !== 'CANCELLED') {
+    <button
+      mat-menu-item
+      class="cancel-item"
+      [disabled]="item.balance !== 0"
+      (click)="statusChange.emit('cancel')"
+    >
+      <mat-icon>block</mat-icon>
+      <span>
+        Cancelar cuenta
+        @if (item.balance !== 0) {
+          <small class="hint">Requiere saldo $0</small>
+        }
+      </span>
+    </button>
+  }
+</mat-menu>
+
+<p class="number">{{ item.accountNumber | accountNumber }}</p>
+
+<div class="balance">
+  <span class="caption">Saldo</span>
+  <strong [class.negative]="item.balance < 0">
+    {{ item.balance | currency: 'COP' : 'symbol-narrow' : '1.2-2' }}
+  </strong>
+</div>
+
+@if (overdraftInUse() > 0) {
+  <div class="overdraft" role="group" aria-label="Sobregiro en uso">
+    <div class="overdraft-text">
+      <span>Sobregiro en uso</span>
+      <span>
+        {{ overdraftInUse() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }} de
+        {{ item.overdraftLimit | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+      </span>
+    </div>
+    <div class="overdraft-bar">
+      <span [style.width.%]="overdraftPercent()"></span>
+    </div>
+  </div>
+}
+
+<div class="details">
+  <div>
+    <span class="caption">
+      {{ item.status === 'INACTIVE' ? 'Disponible al activarla' : 'Disponible' }}
+    </span>
+    <span>{{ item.availableBalance | currency: 'COP' : 'symbol-narrow' : '1.2-2' }}</span>
+  </div>
+  <!-- A cancelled account has no overdraft line any more (SUP-14) -->
+  @if (item.accountType === 'CHECKING' && item.status !== 'CANCELLED') {
+    <div>
+      <span class="caption">Cupo de sobregiro</span>
+      <span>{{ item.overdraftLimit | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</span>
+    </div>
+  }
+  @if (item.gmfExempt) {
+    <span class="badge">Exenta GMF</span>
+  }
+</div>

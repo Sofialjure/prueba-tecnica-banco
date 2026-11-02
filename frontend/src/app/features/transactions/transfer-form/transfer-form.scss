@@ -1,0 +1,39 @@
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 10px;
+  font-weight: 600;
+  color: var(--app-navy);
+
+  span {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--app-navy);
+    color: var(--app-gold);
+    font-size: 12px;
+  }
+}
+
+.breakdown .receives {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  color: #1e7a3c;
+  font-weight: 600;
+}
+
+// Inside the select panel (overlay), so it needs to pierce the component styles
+::ng-deep .mat-mdc-option .same-owner {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: #fdf0cf;
+  color: #7a5600;
+  font-size: 12px;
+  font-weight: 600;
+}
