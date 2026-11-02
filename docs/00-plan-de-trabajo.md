@@ -37,8 +37,8 @@ Fases del proyecto en el orden en que se desarrollan. Cada fase se divide en PRs
 | 9.2 | Nube: despliegue | `feature/cloud-deploy` | [#27](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/27) | ✅ |
 | 9.3 | Nube: HTTPS con Let's Encrypt | `feature/cloud-https` | [#28](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/28) | ✅ |
 | 10.1 | Trazabilidad requisito → prueba | `feature/requirements-traceability` | [#29](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/29) | ✅ |
-| 10.2 | Versión 1.0.0 hacia `main` | `release/1.0.0` | — | ⏳ |
-| 10.3 | Tag `v1.0.0` y regreso de `main` a `develop` | `main` → `develop` | — | ⏳ |
+| 10.2 | Versión 1.0.0 hacia `main` | `release/1.0.0` | [#30](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/30) | ✅ |
+| 10.3 | Tag `v1.0.0` y regreso de `main` a `develop` | `chore/close-release-1.0.0` | [#31](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/31) | ✅ |
 
 ## Detalle por fase
 
@@ -123,8 +123,8 @@ Fases del proyecto en el orden en que se desarrollan. Cada fase se divide en PRs
 - [x] 9.2 Desplegar base de datos, backend y frontend en Azure y documentar los servicios usados, costos, seguridad y cómo apagar o borrar ([Despliegue](06-despliegue.md)) → https://entidad-financiera-sofia.northcentralus.cloudapp.azure.com
 - [x] 9.3 HTTPS con Caddy y un certificado gratuito de Let's Encrypt (candado en el navegador y la página carga en celulares)
 
-### 10. Versión 1.0.0 🔄
+### 10. Versión 1.0.0 ✅
 
 - [x] 10.1 Tabla de trazabilidad: cada requisito con su implementación y las pruebas que lo demuestran ([Trazabilidad](07-trazabilidad.md))
-- [ ] 10.2 Rama `release/1.0.0`: versión 1.0.0 en backend y frontend, CHANGELOG y revisión final de la documentación
-- [ ] 10.3 Integración a `main` con el tag `v1.0.0` (Release de GitHub) y regreso de `main` a `develop`
+- [x] 10.2 Rama `release/1.0.0`: versión 1.0.0 en backend y frontend, [CHANGELOG](../CHANGELOG.md) y revisión final de la documentación
+- [x] 10.3 Integración a `main` con el tag `v1.0.0` ([Release de GitHub](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/releases/tag/v1.0.0)) y regreso de `main` a `develop`

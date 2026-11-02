@@ -116,6 +116,7 @@ npm start
 | 6 | [Despliegue](docs/06-despliegue.md) | Docker, integración continua y servicios en la nube |
 | 7 | [Trazabilidad](docs/07-trazabilidad.md) | Cada requisito con su implementación y las pruebas que lo demuestran |
 | — | [Decisiones de arquitectura (ADR)](docs/adr/) | Por qué se tomó cada decisión técnica |
+| — | [Historial de cambios](CHANGELOG.md) | Qué incluye cada versión |
 
 ## Autora
 
