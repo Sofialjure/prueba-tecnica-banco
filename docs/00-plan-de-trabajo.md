@@ -39,6 +39,7 @@ Fases del proyecto en el orden en que se desarrollan. Cada fase se divide en PRs
 | 10.1 | Trazabilidad requisito → prueba | `feature/requirements-traceability` | [#29](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/29) | ✅ |
 | 10.2 | Versión 1.0.0 hacia `main` | `release/1.0.0` | [#30](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/30) | ✅ |
 | 10.3 | Tag `v1.0.0` y regreso de `main` a `develop` | `chore/close-release-1.0.0` | [#31](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/31) | ✅ |
+| 10.4 | README: funcionalidades, stack completo y datos de ejemplo | `docs/readme-improvements` | [#32](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/pull/32) | ✅ |
 
 ## Detalle por fase
 
@@ -128,3 +129,4 @@ Fases del proyecto en el orden en que se desarrollan. Cada fase se divide en PRs
 - [x] 10.1 Tabla de trazabilidad: cada requisito con su implementación y las pruebas que lo demuestran ([Trazabilidad](07-trazabilidad.md))
 - [x] 10.2 Rama `release/1.0.0`: versión 1.0.0 en backend y frontend, [CHANGELOG](../CHANGELOG.md) y revisión final de la documentación
 - [x] 10.3 Integración a `main` con el tag `v1.0.0` ([Release de GitHub](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/releases/tag/v1.0.0)) y regreso de `main` a `develop`
+- [x] 10.4 README con la lista de funcionalidades, el stack completo (Angular 22, Testcontainers, Vitest y Azure), la estructura actualizada, la insignia de la versión y los datos de ejemplo
