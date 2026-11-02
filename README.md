@@ -2,8 +2,17 @@
 
 [![Backend](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/actions/workflows/backend.yml/badge.svg?branch=develop)](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/actions/workflows/backend.yml)
 [![Frontend](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/actions/workflows/frontend.yml/badge.svg?branch=develop)](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/actions/workflows/frontend.yml)
+[![Versión](https://img.shields.io/github/v/release/Sofialjure/prueba-tecnica-entidad-financiera?label=versi%C3%B3n)](https://github.com/Sofialjure/prueba-tecnica-entidad-financiera/releases/tag/v1.0.0)
 
 Aplicación para los trabajadores de una entidad financiera que permite administrar **clientes**, sus **productos financieros** (cuentas de ahorro y corriente) y los **movimientos transaccionales** (consignaciones, retiros y transferencias), con consulta de estados de cuenta.
+
+## Funcionalidades
+
+- **Clientes:** crear, consultar, editar y eliminar, con validación de mayoría de edad, identificación única y formato de correo. No se elimina un cliente que tenga productos.
+- **Cuentas:** ahorros y corriente con número automático de 10 dígitos (53… y 33…). Se activan, inactivan y cancelan; solo se cancela con saldo $0. Máximo una cuenta de cada tipo abierta por cliente.
+- **Sobregiro:** la cuenta corriente puede quedar en negativo hasta su cupo; el saldo disponible es saldo + cupo.
+- **Transacciones:** consignaciones, retiros y transferencias entre cuentas, con cobro del **GMF 4x1000** en las cuentas no exentas y comprobante de cada operación.
+- **Estado de cuenta:** movimientos con el saldo después de cada uno, totales, filtro por tipo y descarga en CSV.
 
 > ✅ Todos los requisitos del enunciado están implementados y probados: ver la [trazabilidad requisito → prueba](docs/07-trazabilidad.md). El avance completo está en el [plan de trabajo](docs/00-plan-de-trabajo.md) y en el historial de Pull Requests.
 
@@ -14,10 +23,11 @@ Aplicación para los trabajadores de una entidad financiera que permite administ
 | Backend | Java 21 · Spring Boot 4 · Spring Data JPA · Bean Validation · MapStruct |
 | Base de datos | PostgreSQL 16 · Flyway (migraciones DDL/DML) |
 | Documentación API | OpenAPI 3 · Swagger UI (springdoc) |
-| Pruebas | JUnit 5 · Mockito · MockMvc · JaCoCo |
-| Frontend | Angular · TypeScript · Angular Material |
+| Frontend | Angular 22 · TypeScript · Angular Material |
+| Pruebas | JUnit 5 · Mockito · MockMvc · Testcontainers · JaCoCo (backend) · Vitest (frontend) |
 | Contenedores | Docker · Docker Compose · Nginx |
 | CI/CD | GitHub Actions |
+| Nube | Microsoft Azure (máquina virtual) · Caddy con HTTPS de Let's Encrypt |
 
 ## Arquitectura
 
@@ -27,10 +37,13 @@ Backend con **arquitectura hexagonal (puertos y adaptadores)**. El dominio no de
 
 ```
 prueba-tecnica-entidad-financiera/
+├── .github/workflows/   # Integración continua (backend y frontend)
 ├── backend/             # API REST (Spring Boot)
 ├── frontend/            # SPA (Angular)
-├── docs/                # Documentación técnica
+├── deploy/azure/        # Despliegue en Azure: preparación del servidor, HTTPS y script
+├── docs/                # Documentación técnica y ADR
 ├── docker-compose.yml   # Orquestación de contenedores
+├── CHANGELOG.md         # Historial de versiones
 └── README.md
 ```
 
@@ -58,6 +71,7 @@ La primera vez tarda unos minutos, porque compila el backend y el frontend dentr
 | Swagger UI | http://localhost:8080/swagger-ui.html |
 
 - **Puertos ocupados:** se cambian en `.env` (`FRONTEND_PORT`, `BACKEND_PORT`, `DB_PORT`) o al lanzar el comando. En PowerShell: `$env:DB_PORT="5433"; docker compose up --build`.
+- **Datos de ejemplo:** la base de datos arranca con 3 clientes (Ana María Gómez, Carlos Andrés Pérez y Laura Restrepo), 4 cuentas y sus movimientos, para probar la aplicación enseguida. Los carga la migración `V2__seed_data.sql`.
 - **Detener:** `docker compose down`. Los datos quedan en el volumen `pgdata`; `docker compose down -v` los borra y la próxima vez arranca con los datos de ejemplo.
 
 ## Ejecución local del backend (desarrollo)
