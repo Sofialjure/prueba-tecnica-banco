@@ -7,7 +7,6 @@
 La prueba evalúa el uso de **servicios en la nube**. La aplicación ya corre completa con `docker compose up --build` (fase 7). Hay tres restricciones:
 
 - **Sin tarjeta de crédito:** la autora no quiere registrar una tarjeta. AWS, Google Cloud, Oracle y la cuenta gratuita normal de Azure la exigen, aunque no cobren.
-- **Explicable:** la solución debe poder contarse en pocas frases en una entrevista.
 - **Costo controlado:** tiene que caber en el crédito disponible y poder apagarse o borrarse fácilmente.
 
 La autora tiene una suscripción **Azure for Students** (verificada con su correo institucional): no pide tarjeta e incluye crédito por 12 meses. Esa suscripción solo permite crear recursos en `westus2`, `northcentralus`, `chilecentral`, `brazilsouth` y `francecentral`.
