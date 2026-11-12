@@ -68,25 +68,7 @@ com.pruebatecnica.entidadfinanciera
     └── config               # Configuración y manejo global de errores
 ```
 
-### Flujo de una petición (ejemplo: retiro)
 
-```mermaid
-sequenceDiagram
-    participant FE as Frontend
-    participant C as TransactionController
-    participant S as TransactionService
-    participant D as Account (dominio)
-    participant P as AccountRepositoryPort
-    FE->>C: POST /api/v1/transactions/withdrawals
-    C->>S: withdraw(command)
-    S->>P: findByNumberForUpdate(number) [lock]
-    P-->>S: Account
-    S->>D: account.debit(amount)
-    D-->>S: valida estado y saldo disponible
-    S->>P: save(account) + registrar movimiento
-    S-->>C: Transaction
-    C-->>FE: 201 Created
-```
 
 ## 2.3 Patrones de diseño
 
